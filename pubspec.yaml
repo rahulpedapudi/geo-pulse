@@ -13,6 +13,7 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   google_fonts: ^6.2.1
+  flutter_native_splash:
 
 dev_dependencies:
   flutter_test:
@@ -22,3 +23,16 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/images/GeoPulse.png
+
+  android: true
+  ios: true
+
+  fullscreen: true
+  android_gravity: center
+  ios_content_mode: center

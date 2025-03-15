@@ -1,4 +1,11 @@
 ﻿import 'package:flutter/material.dart';
+import 'package:project_x/screens/pages/contact_page.dart';
+import 'package:project_x/screens/pages/donate_page.dart';
+import 'package:project_x/screens/pages/find_shelter.dart';
+import 'package:project_x/screens/pages/guides_page.dart';
+import 'package:project_x/screens/pages/report_incident.dart';
+import 'package:project_x/screens/pages/settings_page.dart';
+import 'package:project_x/widgets/basic_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,6 +15,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+
+  void _navigateToPage(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,108 +54,22 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       ),
-      drawer: Drawer(
-        shape: ContinuousRectangleBorder(),
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Color(0xffE6E6E6),
-                        radius: 34,
-                        child: Icon(Icons.person, color: Color(0xffCCCCCC)),
-                      ),
-                      SizedBox(width: 12),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Hello User",
-                            style: Theme.of(context).textTheme.headlineLarge,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "View Profile",
-                                style: Theme.of(context).textTheme.labelMedium,
-                              ),
-                              IconButton(
-                                onPressed: null,
-                                icon: Icon(Icons.chevron_right_rounded),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home_rounded),
-              title: Text("Home"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.emergency),
-              title: Text("Emergency Help"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.night_shelter_rounded),
-              title: Text("Find Shelter"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.report),
-              title: Text("Report an Incident"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.book_rounded),
-              title: Text("Guides"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.contact_support_rounded),
-              title: Text("Contact Support"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text("Settings"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
+      drawer: BasicDrawer(
+        onItemTap: _navigateToPage,
+        selectedIndex: _selectedIndex,
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text("Home Page"),
+        child: IndexedStack(
+          index: _selectedIndex,
+          children: [
+            Center(child: Text("Home Page")),
+            Scaffold(body: FindShelter()),
+            Scaffold(body: ReportIncidentPage()),
+            Scaffold(body: GuidesPage()),
+            Scaffold(body: DonatePage()),
+            Scaffold(body: ContactPage()),
+            Scaffold(body: SettingsPage()),
+          ],
         ),
       ),
     );
