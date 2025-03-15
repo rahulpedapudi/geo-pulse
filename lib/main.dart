@@ -43,29 +43,49 @@ class _StartPageState extends State<StartPage> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: IndexedStack(index: currentPageIndex, children: screens),
       bottomNavigationBar: NavigationBar(
-        indicatorColor: const Color.fromARGB(255, 210, 210, 210),
+        indicatorColor: Theme.of(context).colorScheme.surface,
+        indicatorShape: StadiumBorder(),
         onDestinationSelected: (value) {
           setState(() {
             currentPageIndex = value;
           });
         },
         selectedIndex: currentPageIndex,
-        indicatorShape: CircleBorder(),
         destinations: [
-          NavigationDestination(icon: Icon(Icons.home_rounded), label: "Home"),
           NavigationDestination(
-            icon: Icon(Icons.emergency_rounded),
-            label: "Emergency",
+            selectedIcon: Icon(
+              Icons.home_rounded,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            icon: Icon(Icons.home_outlined),
+            label: "Home",
           ),
           NavigationDestination(
-            icon: Icon(Icons.newspaper_rounded),
+            icon: Icon(Icons.emergency_outlined),
+            label: "Emergency",
+            selectedIcon: Icon(
+              Icons.emergency_rounded,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.newspaper_outlined),
+            selectedIcon: Icon(
+              Icons.newspaper_rounded,
+              color: Theme.of(context).colorScheme.primary,
+            ),
             label: "News",
           ),
           NavigationDestination(
-            icon: Icon(Icons.account_circle_rounded),
+            icon: Icon(Icons.account_circle_outlined),
+            selectedIcon: Icon(
+              Icons.account_circle_rounded,
+              color: Theme.of(context).colorScheme.primary,
+            ),
             label: "Account",
           ),
         ],

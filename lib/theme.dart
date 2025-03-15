@@ -18,7 +18,7 @@ ThemeData appTheme = ThemeData(
     headlineLarge: GoogleFonts.urbanist(
       fontSize: 32,
       fontWeight: FontWeight.bold,
-      color: Color(0xFF0B191E),
+      color: (Colors.white),
     ),
     bodyLarge: GoogleFonts.plusJakartaSans(
       fontSize: 16,
